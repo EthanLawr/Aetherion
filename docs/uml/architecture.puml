@@ -1,0 +1,36 @@
+@startuml Architecture
+start
+
+switch(Aetherion Password Manager)
+case(Use Password Manager)
+  repeat :Password Manager;
+  #palegreen:Execute Code;
+  if (Use Password Generator?) then (yes)
+    :Password Generator;
+    #palegreen:Execute Code;
+  else (no)
+  endif
+  if (Use Password Checker?) then (yes)
+    :Password Checker;
+    #palegreen:Execute Code;
+    else (no) 
+  endif
+  repeat while (End Here?) is (no) not (yes)
+  stop
+case (Use Password Generator)
+  repeat :Password Generator;
+  #palegreen:Execute Code;
+  if (Use Password Checker?) then (yes)
+    :Password Checker;
+    #palegreen:Execute Code;
+    else (no)
+  endif 
+  repeat while (End Here?) is (no) not (yes)
+
+  stop
+
+case (Use Password Checker)
+  repeat :Password Checker;
+  #palegreen:Execute Code;
+  repeat while (End Here?) is (no) not (yes)
+  stop
