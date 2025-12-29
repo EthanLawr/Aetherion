@@ -1,0 +1,19 @@
+@startuml Sequence
+actor User
+participant "Password Manager" as PM
+participant "Password Generator" as PG
+participant "Password Checker" as PC
+participant "Crypto Engine" as CE
+participant "Storage Backend" as SB
+
+User -> PM : request new password(service, username)
+PM -> PG : generate(length, charset)
+PG --> PM : password
+PM -> PC : check_strength(password)
+PC --> PM : strength_report
+PM -> CE : encrypt(password)
+CE --> PM : encrypted_password
+PM -> SB : save(service, username, encrypted_password)
+SB --> PM : success
+PM --> User : password saved confirmation
+@enduml

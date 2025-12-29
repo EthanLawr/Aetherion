@@ -1,0 +1,31 @@
+@startuml Class
+class PasswordGenerator {
+  +generate(length:int, charset:str):str
+}
+
+class PasswordChecker {
+  +check_strength(password:str):PasswordStrength
+}
+
+class PasswordManager {
+  -crypto:CryptoEngine
+  -storage:StorageBackend
+  +add_entry(service:str, username:str, password:str)
+  +get_entry(service:str)
+}
+
+class CryptoEngine {
+  +encrypt(data:str):bytes
+  +decrypt(data:bytes):str
+}
+
+class StorageBackend {
+  +save(entry:CredentialEntry)
+  +load(service:str):CredentialEntry
+}
+
+PasswordManager --> PasswordGenerator
+PasswordManager --> PasswordChecker
+PasswordManager --> CryptoEngine
+PasswordManager --> StorageBackend
+@enduml
